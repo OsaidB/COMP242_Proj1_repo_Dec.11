@@ -4,7 +4,7 @@ public class test {
 
 	public static void main(String[] args) throws Exception {
 //		
-//		DLinkedList<Integer> dList =new DLinkedList<>();
+		DLinkedList<GazaTawjihi> dList =new DLinkedList<>();
 //		
 //		dList.insertLast(55);
 //		dList.insertLast(60);
@@ -36,7 +36,8 @@ public class test {
 //		System.out.println(Main.lWB.modeWB()+"\n");
 		
 //============================================================
-		Main.lGaza.displayTopTen();
+//		dList=Main.lGaza.gazaDisplayTopTen();
+//		System.out.println(dList);
 
 		System.out.println("\n\n");
 		Main.lGaza.gazaFindAbove(99.4);
