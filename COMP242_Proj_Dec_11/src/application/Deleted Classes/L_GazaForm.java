@@ -1,22 +1,24 @@
-package application;
-
+/*
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class S_GazaForm extends StackPane {
+public class L_GazaForm extends StackPane {
 
-	public S_GazaForm(String Operation) {
+	public L_GazaForm(String Operation) {
 
-		this.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("c_form_styles.css")).toExternalForm());
+		this.getStylesheets()
+				.add(Objects.requireNonNull(this.getClass().getResource("c_form_styles.css")).toExternalForm());
 
 		this.setPadding(new Insets(40, 40, 40, 40));
 
@@ -35,7 +37,7 @@ public class S_GazaForm extends StackPane {
 		grid.setAlignment(Pos.CENTER);
 		grid.getStyleClass().add("grid-pane");
 
-		Text form_title = new Text(Operation + " Science Gaza Form");
+		Text form_title = new Text(Operation + " Literary Gaza Form");
 
 		form_title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 
@@ -48,42 +50,6 @@ public class S_GazaForm extends StackPane {
 
 		grid.add(seatNumber_tf, 1, 1);
 
-		/////////////////////////////////////////////////////////////////////////////
-
-		Label branchTitle = new Label("Branch Title:");
-		grid.add(branchTitle, 0, 2);
-
-		TextField branch_tf = new TextField("Science");
-
-//		branch_tf.textProperty().addListener(new ChangeListener<String>() {
-//			@Override
-//			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//				if (seatNumber_tf.getText().length() < 1) {
-//					branch_tf.setText("Fill the Code Field !");
-//
-//				}
-//			}
-//		});
-
-		grid.add(branch_tf, 1, 2);
-
-		/////////////////////////////////////////////////////////////////////////////
-
-		Label studentAvg = new Label("Student Average:");
-		grid.add(studentAvg, 0, 3);
-
-		TextField studentAvg_tf = new TextField();
-
-		studentAvg_tf.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("\\d*")) {
-					studentAvg_tf.setText(newValue.replaceAll("[^\\d]", ""));
-				}
-			}
-		});
-
-		grid.add(studentAvg_tf, 1, 3);
 		////////////////////////////// Submission ////////////////////////////
 
 		Label st_lbl = new Label("Status");
@@ -96,21 +62,33 @@ public class S_GazaForm extends StackPane {
 		submit.getStyleClass().add("small_btn");
 
 		/////////////////////////////////////////////////////////////////////////////
+		if (Operation.equals("Add")) {
 
-		Pane spring = new Pane();
-		spring.minHeightProperty().bind(studentAvg_tf.heightProperty());
-		Pane spring2 = new Pane();
-		spring2.minHeightProperty().bind(studentAvg_tf.heightProperty());
+			Label studentAvg = new Label("Student Average:");
+			grid.add(studentAvg, 0, 3);
 
-		grid.add(spring2, 0, 5);
-		grid.add(spring, 0, 6);
+			TextField studentAvg_tf = new TextField();
 
-		/////////////////////////////////////////////////////////////////////////////
+			studentAvg_tf.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					if (!newValue.matches("\\d*")) {
+						studentAvg_tf.setText(newValue.replaceAll("[^\\d]", ""));
+					}
+				}
+			});
 
-		submit.setOnAction((event) -> { // lambda expression
+			grid.add(studentAvg_tf, 1, 3);
 
-			switch (Operation) {
-			case "Add" -> {
+			Pane spring = new Pane();
+			spring.minHeightProperty().bind(studentAvg_tf.heightProperty());
+			Pane spring2 = new Pane();
+			spring2.minHeightProperty().bind(studentAvg_tf.heightProperty());
+
+			grid.add(spring2, 0, 5);
+			grid.add(spring, 0, 6);
+
+			submit.setOnAction((event) -> { // lambda expression
 
 				if (seatNumber_tf.getText().length() < 1) {
 					status.setText("Enter a valid Seat Number");
@@ -128,8 +106,9 @@ public class S_GazaForm extends StackPane {
 
 				try {
 
-					GazaTawjihi stud = new GazaTawjihi(Integer.parseInt(seatNumber_tf.getText()), "Science", Double.parseDouble(studentAvg_tf.getText()));
-					Main.sGaza.insertGazaSorrted(stud);
+					GazaTawjihi stud = new GazaTawjihi(Integer.parseInt(seatNumber_tf.getText()), "Literary",
+							Double.parseDouble(studentAvg_tf.getText()));
+					Main.lGaza.insertGazaSorrted(stud);
 
 					status.setText("Added Successfully");
 					status.getStyleClass().remove("warning-label");
@@ -140,7 +119,15 @@ public class S_GazaForm extends StackPane {
 					status.getStyleClass().add("warning-label");
 				}
 
-			}
+			});
+		}
+
+		/////////////////////////////////////////////////////////////////////////////
+
+		submit.setOnAction((event) -> { // lambda expression
+
+			switch (Operation) {
+
 			case "Delete" -> {
 				if (seatNumber_tf.getText().length() < 1) {
 					status.setText("Enter a valid Seat Number");
@@ -148,8 +135,14 @@ public class S_GazaForm extends StackPane {
 					status.getStyleClass().add("warning-label");
 					return;
 				}
-				Main.sGaza.deleteGazaSorted(Integer.parseInt(seatNumber_tf.getText()));
-
+			boolean b=	Main.lGaza.deleteGazaSorted(Integer.parseInt(seatNumber_tf.getText()));
+				
+				if (b == false) {
+					status.setText("Student Not Found! OR you are trying to delete from an empty list!");
+					status.getStyleClass().remove("success-label");
+					status.getStyleClass().add("warning-label");
+					return;
+				}
 				status.setText("deleted successfully");
 				status.getStyleClass().remove("warning-label");
 				status.getStyleClass().add("success-label");
@@ -162,23 +155,33 @@ public class S_GazaForm extends StackPane {
 					status.getStyleClass().add("warning-label");
 					return;
 				}
-				GazaTawjihi m = Main.sGaza.searchGazaList(Integer.parseInt(seatNumber_tf.getText()));
+				GazaTawjihi m = Main.lGaza.searchGazaList(Integer.parseInt(seatNumber_tf.getText()));
 
 				if (m == null) {
-					status.setText("Name Not Found! OR you are trying to search in an empty list!");
+					status.setText("Student Not Found! OR you are trying to search in an empty list!");
 					status.getStyleClass().remove("success-label");
 					status.getStyleClass().add("warning-label");
 					return;
 				}
 
-				seatNumber_tf.setText(Integer.toString(m.getSeatNumber()));
-				branch_tf.setText(m.getBranch());
-				studentAvg_tf.setText("" + m.getAvg());
+				Stage st = new Stage();
+
+				Scene root_scene = null;
+
+				String g = m + "";
+				ProcessResultsScreen pr = new ProcessResultsScreen(g);
+				root_scene = new Scene(pr);
+
+				st.setScene(root_scene);
+				st.setMinHeight(100);
+				st.setMinWidth(300);
+				st.show();
 
 				status.setText("Found stident");
 				status.getStyleClass().remove("warning-label");
 				status.getStyleClass().add("success-label");
 			}
+
 			}
 
 		});
@@ -197,7 +200,7 @@ public class S_GazaForm extends StackPane {
 		all.getChildren().add(main);
 
 		back_btn.setOnAction((event) -> { // lambda expression
-			Main.stage.getScene().setRoot(new S_GazaScreen());
+			Main.stage.getScene().setRoot(new L_GazaScreen());
 		});
 
 		this.getChildren().add(all);
@@ -205,3 +208,4 @@ public class S_GazaForm extends StackPane {
 		this.getStyleClass().add("light-bg");
 	}
 }
+*/

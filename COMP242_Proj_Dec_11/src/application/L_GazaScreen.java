@@ -91,24 +91,28 @@ public class L_GazaScreen extends StackPane {
 
 		Button back_btn = new Button("Back");
 		back_btn.getStyleClass().add("back-button");
+		
 		all.getChildren().add(back_btn);
 
 		main.getChildren().add(btns_pane);
+		
 		all.getChildren().add(main);
-
-		back_btn.setOnAction((event) -> { // lambda expression
-			Main.stage.getScene().setRoot(new GazaScreen());
-		});
 
 		this.getChildren().add(all);
 
 		this.getStyleClass().add("light-bg");
-
+//////////////////////////////////setOnAction//////////////////////////////////
+		back_btn.setOnAction((event) -> { // lambda expression
+			Main.stage.getScene().setRoot(new GazaScreen());
+		});
 		add_btn.setOnAction((event) -> { // lambda expression
-			Main.stage.getScene().setRoot(new L_GazaForm("Add"));
+			Main.stage.getScene().setRoot(new GazaForm("Add Literary"));
 		});
 		del_btn.setOnAction((event) -> { // lambda expression
-			Main.stage.getScene().setRoot(new L_GazaForm("Delete"));
+			Main.stage.getScene().setRoot(new GazaForm("Delete Literary"));
+		});
+		search_btn.setOnAction((event) -> { // lambda expression
+			Main.stage.getScene().setRoot(new GazaForm("Search Literary"));
 		});
 		top10_btn.setOnAction((event) -> { // lambda expression
 
@@ -116,7 +120,7 @@ public class L_GazaScreen extends StackPane {
 
 			Scene root_scene = null;
 
-			DLinkedList<GazaTawjihi> gazaTop10 = Main.lGaza.gazaDisplayTopTen();
+			DLinkedList<GazaTawjihi> gazaTop10 = Main.lGaza.gazaDisplayTopTen();////////////////////////////////////////
 
 			top10Screen ls = new top10Screen(gazaTop10);
 			root_scene = new Scene(ls);
@@ -165,7 +169,7 @@ public class L_GazaScreen extends StackPane {
 
 				Scene root_scene2 = null;
 
-				String gazaAboveGrada = Main.lGaza.gazaFindAbove(Double.parseDouble(grade_tf.getText()));
+				String gazaAboveGrada = Main.lGaza.gazaFindAbove(Double.parseDouble(grade_tf.getText()));////////////////////////////////////////
 
 				ProcessResultsScreen pr = new ProcessResultsScreen(gazaAboveGrada);
 				root_scene2 = new Scene(pr);
@@ -192,16 +196,13 @@ public class L_GazaScreen extends StackPane {
 			st.setMinWidth(300);
 			st.show();
 		});
-		search_btn.setOnAction((event) -> { // lambda expression
-			Main.stage.getScene().setRoot(new L_GazaForm("Search"));
-		});
 		mode_btn.setOnAction((event) -> { // lambda expression
 
 			Stage st = new Stage();
 
 			Scene root_scene = null;
 
-			double mode = Main.lGaza.modeGaza();
+			double mode = Main.lGaza.modeGaza();////////////////////////////////////////
 			String g = mode + "";
 			ProcessResultsScreen pr = new ProcessResultsScreen(g);
 			root_scene = new Scene(pr);
@@ -219,7 +220,7 @@ public class L_GazaScreen extends StackPane {
 
 			Scene root_scene = null;
 
-			double mode = Main.lGaza.gazaMean();
+			double mode = Main.lGaza.gazaMean();////////////////////////////////////////
 			String g = mode + "";
 			ProcessResultsScreen pr = new ProcessResultsScreen(g);
 			root_scene = new Scene(pr);

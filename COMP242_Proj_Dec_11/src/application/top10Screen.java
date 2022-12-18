@@ -10,14 +10,14 @@ import java.util.Objects;
 
 public class top10Screen extends VBox {
 
-	public <T> top10Screen(DLinkedList gazaTop10) {
+	public <T> top10Screen(DLinkedList Top10) {
 
 		this.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("c_form_styles.css")).toExternalForm());
 
 		this.setPadding(new Insets(60));
 		this.setSpacing(40);
 		
-		DNode<T> curr = gazaTop10.head;
+		DNode<T> curr = Top10.head;
 		for (int i = 0; i < 9; i++) {
 
 			Label lbl = new Label(curr.toString());

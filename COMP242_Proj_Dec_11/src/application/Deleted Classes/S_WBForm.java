@@ -1,5 +1,4 @@
-package application;
-
+/*
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -12,9 +11,9 @@ import javafx.scene.text.Text;
 
 import java.util.Objects;
 
-public class L_WBForm extends StackPane {
+public class S_WBForm extends StackPane {
 
-	public L_WBForm(String Operation) {
+	public S_WBForm(String Operation) {
 
 		this.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("c_form_styles.css")).toExternalForm());
 
@@ -29,13 +28,14 @@ public class L_WBForm extends StackPane {
 		main.setAlignment(Pos.CENTER);
 		main.setSpacing(30);
 
+
 		GridPane grid = new GridPane();
 		grid.setHgap(150);
 		grid.setVgap(40);
 		grid.setAlignment(Pos.CENTER);
 		grid.getStyleClass().add("grid-pane");
 
-		Text form_title = new Text(Operation + " Literary WestBank Form");
+		Text form_title = new Text(Operation + " Science WestBank Form");
 
 		form_title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 
@@ -53,7 +53,7 @@ public class L_WBForm extends StackPane {
 		Label branchTitle = new Label("Branch Title:");
 		grid.add(branchTitle, 0, 2);
 
-		TextField branch_tf = new TextField("Literary");
+		TextField branch_tf = new TextField("Science");
 
 //		branch_tf.textProperty().addListener(new ChangeListener<String>() {
 //			@Override
@@ -128,8 +128,8 @@ public class L_WBForm extends StackPane {
 
 				try {
 
-					W_B_Tawjihi stud = new W_B_Tawjihi(Integer.parseInt(seatNumber_tf.getText()), "Literary", Double.parseDouble(studentAvg_tf.getText()));
-					Main.lWB.insertWBSorrted(stud);
+					W_B_Tawjihi stud = new W_B_Tawjihi(Integer.parseInt(seatNumber_tf.getText()), "Science", Double.parseDouble(studentAvg_tf.getText()));
+					Main.sWB.insertWBSorrted(stud);
 
 					status.setText("Added Successfully");
 					status.getStyleClass().remove("warning-label");
@@ -148,7 +148,7 @@ public class L_WBForm extends StackPane {
 					status.getStyleClass().add("warning-label");
 					return;
 				}
-				Main.lWB.deleteWBSorted(Integer.parseInt(seatNumber_tf.getText()));
+				Main.sWB.deleteWBSorted(Integer.parseInt(seatNumber_tf.getText()));
 
 				status.setText("deleted successfully");
 				status.getStyleClass().remove("warning-label");
@@ -162,7 +162,7 @@ public class L_WBForm extends StackPane {
 					status.getStyleClass().add("warning-label");
 					return;
 				}
-				W_B_Tawjihi m = Main.lWB.searchWBList(Integer.parseInt(seatNumber_tf.getText()));
+				W_B_Tawjihi m = Main.sWB.searchWBList(Integer.parseInt(seatNumber_tf.getText()));
 
 				if (m == null) {
 					status.setText("Name Not Found! OR you are trying to search in an empty list!");
@@ -197,7 +197,7 @@ public class L_WBForm extends StackPane {
 		all.getChildren().add(main);
 
 		back_btn.setOnAction((event) -> { // lambda expression
-			Main.stage.getScene().setRoot(new L_WBScreen());
+			Main.stage.getScene().setRoot(new S_WBScreen());
 		});
 
 		this.getChildren().add(all);
@@ -205,3 +205,4 @@ public class L_WBForm extends StackPane {
 		this.getStyleClass().add("light-bg");
 	}
 }
+*/

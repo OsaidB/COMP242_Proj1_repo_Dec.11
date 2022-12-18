@@ -1,5 +1,4 @@
-package application;
-
+/*
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -12,9 +11,9 @@ import javafx.scene.text.Text;
 
 import java.util.Objects;
 
-public class S_WBForm extends StackPane {
+public class S_GazaForm extends StackPane {
 
-	public S_WBForm(String Operation) {
+	public S_GazaForm(String Operation) {
 
 		this.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("c_form_styles.css")).toExternalForm());
 
@@ -29,14 +28,13 @@ public class S_WBForm extends StackPane {
 		main.setAlignment(Pos.CENTER);
 		main.setSpacing(30);
 
-
 		GridPane grid = new GridPane();
 		grid.setHgap(150);
 		grid.setVgap(40);
 		grid.setAlignment(Pos.CENTER);
 		grid.getStyleClass().add("grid-pane");
 
-		Text form_title = new Text(Operation + " Science WestBank Form");
+		Text form_title = new Text(Operation + " Science Gaza Form");
 
 		form_title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 
@@ -129,8 +127,8 @@ public class S_WBForm extends StackPane {
 
 				try {
 
-					W_B_Tawjihi stud = new W_B_Tawjihi(Integer.parseInt(seatNumber_tf.getText()), "Science", Double.parseDouble(studentAvg_tf.getText()));
-					Main.sWB.insertWBSorrted(stud);
+					GazaTawjihi stud = new GazaTawjihi(Integer.parseInt(seatNumber_tf.getText()), "Science", Double.parseDouble(studentAvg_tf.getText()));
+					Main.sGaza.insertGazaSorrted(stud);
 
 					status.setText("Added Successfully");
 					status.getStyleClass().remove("warning-label");
@@ -149,7 +147,7 @@ public class S_WBForm extends StackPane {
 					status.getStyleClass().add("warning-label");
 					return;
 				}
-				Main.sWB.deleteWBSorted(Integer.parseInt(seatNumber_tf.getText()));
+				Main.sGaza.deleteGazaSorted(Integer.parseInt(seatNumber_tf.getText()));
 
 				status.setText("deleted successfully");
 				status.getStyleClass().remove("warning-label");
@@ -163,7 +161,7 @@ public class S_WBForm extends StackPane {
 					status.getStyleClass().add("warning-label");
 					return;
 				}
-				W_B_Tawjihi m = Main.sWB.searchWBList(Integer.parseInt(seatNumber_tf.getText()));
+				GazaTawjihi m = Main.sGaza.searchGazaList(Integer.parseInt(seatNumber_tf.getText()));
 
 				if (m == null) {
 					status.setText("Name Not Found! OR you are trying to search in an empty list!");
@@ -198,7 +196,7 @@ public class S_WBForm extends StackPane {
 		all.getChildren().add(main);
 
 		back_btn.setOnAction((event) -> { // lambda expression
-			Main.stage.getScene().setRoot(new S_WBScreen());
+			Main.stage.getScene().setRoot(new S_GazaScreen());
 		});
 
 		this.getChildren().add(all);
@@ -206,3 +204,4 @@ public class S_WBForm extends StackPane {
 		this.getStyleClass().add("light-bg");
 	}
 }
+*/

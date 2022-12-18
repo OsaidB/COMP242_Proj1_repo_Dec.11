@@ -16,7 +16,6 @@ public class Main extends Application {
 	static DLinkedList<W_B_Tawjihi> sWB = new DLinkedList<>(); // Science WestBank
 
 	static Stage stage;
-//	static MediaRental sys;
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -41,8 +40,9 @@ public class Main extends Application {
 	}
 
 	public static void readGazaFile() throws Exception {
-		// BufferedReader reader = new BufferedReader(new FileReader(FileReader("H:\\JAVA4_Oct2022\\COMP242_Proj1\\src\\application\\Gaza.txt"));
-		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\eclipse-workspaces\\Osa-_-2022oct\\COMP242_Proj1\\src\\application\\Gaza.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader(
+				"C:\\Users\\97059\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\Gaza.txt"));
+//		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\eclipse-workspaces\\Osa-_-2022oct\\COMP242_Proj1\\src\\application\\Gaza.txt"));
 //		System.out.println(reader.readLine());
 		String line;
 
@@ -69,8 +69,9 @@ public class Main extends Application {
 	}
 
 	public static void readWBFile() throws Exception {
-//		BufferedReader reader = new BufferedReader(new FileReader("H:\\JAVA4_Oct2022\\COMP242_Proj1\\src\\application\\Gaza.txt"));
-		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\eclipse-workspaces\\Osa-_-2022oct\\COMP242_Proj1\\src\\application\\WestBank.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader(
+				"C:\\Users\\97059\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\WestBank.txt"));
+//		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\eclipse-workspaces\\Osa-_-2022oct\\COMP242_Proj1\\src\\application\\WestBank.txt"));
 //		System.out.println(reader.readLine());
 		String line;
 

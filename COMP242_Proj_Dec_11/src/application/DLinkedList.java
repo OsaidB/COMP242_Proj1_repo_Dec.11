@@ -254,88 +254,119 @@ public class DLinkedList<T> {
 
 	}
 
-	public void deleteGazaSorted(int seatNum) {// the delete is ccourding to seat number!!
+	public boolean deleteGazaSorted(int seatNum) {// the delete is ccourding to seat number!!
 		DNode<T> curr = head;
 		if (head == null) {
 			System.out.println("you are trying to delete from an empty list!");
-			return;
+			return false;
 		}
 		int currSeatNum = ((GazaTawjihi) curr.getData()).getSeatNumber();
 
 		// while (curr != null && curr.getData().equals(data)) {
-		while (curr != null && (currSeatNum < seatNum)) {
-
-			curr = curr.getNext();
+//		while (curr != null && (currSeatNum < seatNum)) {
+		while (curr != null && (currSeatNum > seatNum)) {
+			curr = curr.getNext();// the next is smaller
 
 			if (curr != null) {
 				currSeatNum = ((GazaTawjihi) curr.getData()).getSeatNumber();
 			}
 		}
+
 		System.out.println(curr);
+		/*
+		 * curr: Three cases
+		 * 
+		 * 1-null
+		 * 
+		 * 2-same as the node we want(== seatNum)
+		 * 
+		 * 3-smaller than the node we want(currSeatNum<seatNum)
+		 * 
+		 */
+		if (curr == null || currSeatNum < seatNum) {
+			System.out.println("element not found!");
+			return false;
+		}
+//if(currSeatNum < seatNum)
+//		if (!(currSeatNum == seatNum)) {
 
-		if (!(curr == null || !(currSeatNum == seatNum))) {
-			if (curr.getPrev() == null && curr.getNext() == null) // case 0 : one node
-				head = null;
-			else if (curr.getPrev() == null) { // case 1 : delete 1st node
-				head = curr.getNext();
-				// head.prev = null;
-				head.setPrev(null);
-			} else if (curr.getNext() == null) // case 2 : delete last
-				// curr.prev.next = null;
-				curr.getPrev().setNext(null);
-			else { // case 3 : delete between
-					// curr.prev.next = curr.next;
-				curr.getPrev().setNext(curr.getNext());
+		if (curr.getPrev() == null && curr.getNext() == null) // case 0 : one node
+			head = null;
+		else if (curr.getPrev() == null) { // case 1 : delete 1st node
+			head = curr.getNext();
+			// head.prev = null;
+			head.setPrev(null);
+		} else if (curr.getNext() == null) // case 2 : delete last
+			// curr.prev.next = null;
+			curr.getPrev().setNext(null);
+		else { // case 3 : delete between
+				// curr.prev.next = curr.next;
+			curr.getPrev().setNext(curr.getNext());
 
-				// curr.next.prev = curr.prev;
-				curr.getNext().setPrev(curr.getPrev());
-			}
-
+			// curr.next.prev = curr.prev;
+			curr.getNext().setPrev(curr.getPrev());
 		}
 
+//		}else {//currSeatNum == seatNum
+
+//		}
+
+		return true;
 	}
 
-	public void deleteWBSorted(int seatNum) {// the delete is ccourding to seat number!!
+	public boolean deleteWBSorted(int seatNum) {// the delete is ccourding to seat number!!
 		DNode<T> curr = head;
 
 		if (head == null) {
 			System.out.println("you are trying to delete from an empty list!");
-			return;
+			return false;
 		}
 
 		int currSeatNum = ((W_B_Tawjihi) curr.getData()).getSeatNumber();
 
 		// while (curr != null && curr.getData().equals(data)) {
-		while (curr != null && (currSeatNum < seatNum)) {
-
-			curr = curr.getNext();
+		while (curr != null && (currSeatNum > seatNum)) {
+			curr = curr.getNext();// the next is smaller
 
 			if (curr != null) {
 				currSeatNum = ((W_B_Tawjihi) curr.getData()).getSeatNumber();
 			}
 		}
+
 		System.out.println(curr);
-
-		if (!(curr == null || !(currSeatNum == seatNum))) {
-			if (curr.getPrev() == null && curr.getNext() == null) // case 0 : one node
-				head = null;
-			else if (curr.getPrev() == null) { // case 1 : delete 1st node
-				head = curr.getNext();
-				// head.prev = null;
-				head.setPrev(null);
-			} else if (curr.getNext() == null) // case 2 : delete last
-				// curr.prev.next = null;
-				curr.getPrev().setNext(null);
-			else { // case 3 : delete between
-					// curr.prev.next = curr.next;
-				curr.getPrev().setNext(curr.getNext());
-
-				// curr.next.prev = curr.prev;
-				curr.getNext().setPrev(curr.getPrev());
-			}
-
+		/*
+		 * curr: Three cases
+		 * 
+		 * 1-null
+		 * 
+		 * 2-same as the node we want(== seatNum)
+		 * 
+		 * 3-smaller than the node we want(currSeatNum<seatNum)
+		 * 
+		 */
+		if (curr == null || currSeatNum < seatNum) {
+			System.out.println("element not found!");
+			return false;
 		}
 
+		if (curr.getPrev() == null && curr.getNext() == null) // case 0 : one node
+			head = null;
+		else if (curr.getPrev() == null) { // case 1 : delete 1st node
+			head = curr.getNext();
+			// head.prev = null;
+			head.setPrev(null);
+		} else if (curr.getNext() == null) // case 2 : delete last
+			// curr.prev.next = null;
+			curr.getPrev().setNext(null);
+		else { // case 3 : delete between
+				// curr.prev.next = curr.next;
+			curr.getPrev().setNext(curr.getNext());
+
+			// curr.next.prev = curr.prev;
+			curr.getNext().setPrev(curr.getPrev());
+		}
+
+		return true;
 	}
 
 //=========================================================
@@ -527,7 +558,7 @@ public class DLinkedList<T> {
 		return result;
 
 	}
-	
+
 	public String wbFindAbove(double specGrade) {// students whom (grade > = specific grade)
 		DNode<T> curr = head;
 
