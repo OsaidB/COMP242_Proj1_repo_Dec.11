@@ -96,12 +96,10 @@ public class DLinkedList<T> {
 	}
 
 //=========================================================
-	public void insertWBSorrted(T data) {// data is the tawjihi object(a node)// (((((UPDATED: descending
-											// order)))))tanazula
+	public void insertWBSorrted(T data) {// data is the tawjihi object(a node)// (((((UPDATED: descending order)))))tanazula
 
 		DNode<T> newNode = new DNode<>(data);
-		double newNodeAvg = ((W_B_Tawjihi) newNode.getData()).getAvg();// the avg of the student that im trying to
-																		// insert
+		double newNodeAvg = ((W_B_Tawjihi) newNode.getData()).getAvg();// the avg of the student that im trying to insert
 
 		if (head == null) {
 			insertFirst(data);
@@ -112,8 +110,7 @@ public class DLinkedList<T> {
 
 		// while (curr != null && (currAvg < newNodeAvg)) {// i want to rech the node
 		// with higher avg to add new node before it(newNode before curr)
-		while (curr != null && (currAvg > newNodeAvg)) {// i want to rech the node with lower avg to add new node after
-														// it(newNode after curr)
+		while (curr != null && (currAvg > newNodeAvg)) {// i want to rech the node with lower avg to add new node after it(newNode after curr)
 
 			if (curr.getNext() == null) {
 				break;
@@ -151,8 +148,7 @@ public class DLinkedList<T> {
 
 	}
 
-	public void insertGazaSorrted(T data) {// data is the tawjihi object(a node)// (((((UPDATED: descending
-											// order)))))tanazula
+	public void insertGazaSorrted(T data) {// data is the tawjihi object(a node)// (((((UPDATED: descending order)))))tanazula
 
 		DNode<T> newNode = new DNode<>(data);
 		double newNodeAvg = ((GazaTawjihi) newNode.getData()).getAvg();// the avg of the student that im trying to
@@ -189,10 +185,7 @@ public class DLinkedList<T> {
 			newNode.setNext(head);
 			head.setPrev(newNode);
 			head = newNode;
-		}
-		// else if (curr.getData().compareTo(data) < 0 && curr.getNext() == null) {
-//		else if (currAvg < newNodeAvg && curr.getNext() == null) { // case 3: insert at last
-		else if (currAvg > newNodeAvg && curr.getNext() == null) { // case 3: insert at last(currAvg > newNodeAvg)
+		} else if (currAvg > newNodeAvg && curr.getNext() == null) { // case 3: insert at last(currAvg > newNodeAvg)
 			newNode.setPrev(curr);
 			curr.setNext(newNode);
 
@@ -553,8 +546,7 @@ public class DLinkedList<T> {
 		System.out.println("\nallCounter : " + allCounter);
 		System.out.println("\nand the percentage of them are :" + percentage + "%");
 
-		String result = "there are " + counter + " Students that are equals or greater than " + specGrade
-				+ "\nand the percentage of them are :" + percentage + "%";
+		String result = "there are " + counter + " Students that are equals or greater than " + specGrade + "\nand the percentage of them are :" + percentage + "%";
 		return result;
 
 	}
@@ -591,8 +583,7 @@ public class DLinkedList<T> {
 		System.out.println("\nallCounter : " + allCounter);
 		System.out.println("\nand the percentage of them are :" + percentage + "%");
 
-		String result = "there are " + counter + " Students that are equals or greater than " + specGrade
-				+ "\nand the percentage of them are :" + percentage + "%";
+		String result = "there are " + counter + " Students that are equals or greater than " + specGrade + "\nand the percentage of them are :" + percentage + "%";
 		return result;
 
 	}
@@ -600,33 +591,71 @@ public class DLinkedList<T> {
 //=========================================================
 	public DLinkedList<GazaTawjihi> gazaDisplayTopTen() {
 		DLinkedList<GazaTawjihi> gazaTop10 = new DLinkedList<>();
+
 		DNode<T> curr = head;
+		DNode<T> curr2 = head.getNext();
 
-		for (int i = 0; i < 9; i++) {
+		double currAvg = ((GazaTawjihi) curr.getData()).getAvg();
+		double curr2Avg = ((GazaTawjihi) curr2.getData()).getAvg();
 
+		int i = 0;
+		while (curr != null && i < 10) {
 			gazaTop10.insertGazaSorrted((GazaTawjihi) curr.getData());
-			if (curr.getNext() == null) {
-				break;
+			System.out.println(curr);
+			while (currAvg == curr2Avg) {
+				gazaTop10.insertGazaSorrted((GazaTawjihi) curr2.getData());
+				System.out.println(curr2);
+				// curr = curr.getNext();
+
+				curr2 = curr2.getNext();
+				curr2Avg = ((GazaTawjihi) curr2.getData()).getAvg();
 			}
-			curr = curr.getNext();
+
+			curr = curr2;
+			curr2 = curr.getNext();
+
+			currAvg = ((GazaTawjihi) curr.getData()).getAvg();
+			curr2Avg = ((GazaTawjihi) curr2.getData()).getAvg();
+
+			i++;
 
 		}
+
 		return gazaTop10;
 	}
 
 	public DLinkedList<W_B_Tawjihi> wbDisplayTopTen() {
 		DLinkedList<W_B_Tawjihi> wbTop10 = new DLinkedList<>();
+
 		DNode<T> curr = head;
+		DNode<T> curr2 = head.getNext();
 
-		for (int i = 0; i < 9; i++) {
+		double currAvg = ((W_B_Tawjihi) curr.getData()).getAvg();
+		double curr2Avg = ((W_B_Tawjihi) curr2.getData()).getAvg();
 
+		int i = 0;
+		while (curr != null && i < 10) {
 			wbTop10.insertWBSorrted((W_B_Tawjihi) curr.getData());
-			if (curr.getNext() == null) {
-				break;
+			System.out.println(curr);
+			while (currAvg == curr2Avg) {
+				wbTop10.insertWBSorrted((W_B_Tawjihi) curr2.getData());
+				System.out.println(curr2);
+				// curr = curr.getNext();
+
+				curr2 = curr2.getNext();
+				curr2Avg = ((W_B_Tawjihi) curr2.getData()).getAvg();
 			}
-			curr = curr.getNext();
+
+			curr = curr2;
+			curr2 = curr.getNext();
+
+			currAvg = ((W_B_Tawjihi) curr.getData()).getAvg();
+			curr2Avg = ((W_B_Tawjihi) curr2.getData()).getAvg();
+
+			i++;
 
 		}
+
 		return wbTop10;
 	}
 

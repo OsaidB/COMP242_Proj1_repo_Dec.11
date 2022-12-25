@@ -2,6 +2,7 @@ package application;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -17,8 +18,9 @@ public class top10Screen extends VBox {
 		this.setPadding(new Insets(60));
 		this.setSpacing(40);
 		
+		
 		DNode<T> curr = Top10.head;
-		for (int i = 0; i < 9; i++) {
+		while (curr!=null) {
 
 			Label lbl = new Label(curr.toString());
 			

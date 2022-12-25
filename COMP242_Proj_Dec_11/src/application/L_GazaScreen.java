@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -91,11 +92,11 @@ public class L_GazaScreen extends StackPane {
 
 		Button back_btn = new Button("Back");
 		back_btn.getStyleClass().add("back-button");
-		
+
 		all.getChildren().add(back_btn);
 
 		main.getChildren().add(btns_pane);
-		
+
 		all.getChildren().add(main);
 
 		this.getChildren().add(all);
@@ -123,7 +124,11 @@ public class L_GazaScreen extends StackPane {
 			DLinkedList<GazaTawjihi> gazaTop10 = Main.lGaza.gazaDisplayTopTen();////////////////////////////////////////
 
 			top10Screen ls = new top10Screen(gazaTop10);
-			root_scene = new Scene(ls);
+			ScrollPane scrollPane = new ScrollPane();
+
+			scrollPane.setContent(ls);
+
+			root_scene = new Scene(scrollPane);
 
 			st.setTitle("All Top 10 Students Info");
 			st.setScene(root_scene);

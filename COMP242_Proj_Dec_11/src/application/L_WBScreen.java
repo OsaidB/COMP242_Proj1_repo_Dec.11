@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -123,8 +124,14 @@ public class L_WBScreen extends StackPane {
 			DLinkedList<W_B_Tawjihi> wbTop10 = Main.lWB.wbDisplayTopTen();////////////////////////////////////////
 
 			top10Screen ls = new top10Screen(wbTop10);
-			root_scene = new Scene(ls);
+//			root_scene = new Scene(ls);
 
+			ScrollPane scrollPane = new ScrollPane();
+
+			scrollPane.setContent(ls);
+
+			root_scene = new Scene(scrollPane);
+			
 			st.setTitle("All Top 10 Students Info");
 			st.setScene(root_scene);
 			st.setMinHeight(100);
