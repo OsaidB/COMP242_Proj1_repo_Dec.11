@@ -1,0 +1,28 @@
+
+
+.Main{
+	-fx-font-size: 100px
+}
+
+
+
+
+.label{
+ -fx-font-size: 24;
+ -fx-font-family: "Lucida Console";
+ -fx-text-fill: "black";
+ -fx-alignment: center;
+}
+
+#titleLabel{
+ -fx-font-size: 70;
+}
+
+
+#customHyperlink{
+   -fx-text-fill: white;
+   -fx-font-size: 70;
+       }
+#customHyperlink:hover{
+   -fx-text-fill: #606060;
+        }

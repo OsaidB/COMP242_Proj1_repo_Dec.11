@@ -6,7 +6,7 @@ public class cursorDriver {
 		
 		
 //////////////////////////////////////////////////////////////////////
-		int L1=list.creatList();
+		int L1=list.creatList();//the ineger stored in "L1" represent the index of the header of this list
 		
 		list.insert(10, L1);
 		list.insert(20, L1);
