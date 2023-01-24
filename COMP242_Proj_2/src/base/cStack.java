@@ -1,11 +1,17 @@
 package base;
 
 public class cStack<T extends Comparable<T>> {
-	CurserList<T> cursor = new CurserList<>(50);
-	
+	CurserList<T> cursor;
+
 	int header;
 
 	public cStack() {
+		cursor = new CurserList<>(50);
+		header = cursor.creatList();
+	}
+
+	public cStack(int size) {
+		cursor = new CurserList<>(size);
 		header = cursor.creatList();
 	}
 

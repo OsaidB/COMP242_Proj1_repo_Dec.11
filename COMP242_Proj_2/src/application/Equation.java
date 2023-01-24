@@ -427,7 +427,7 @@ public class Equation {
 		} else if (isBalanced_var == false) {
 			return equation + " => [ unbalanced equation ]";
 
-		} else {//every thing is okay
+		} else {// every thing is okay
 			return equation + " => " + postFix.replaceAll(",", "") + " => " + evaluation;
 
 		}

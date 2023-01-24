@@ -214,7 +214,7 @@ public class HomeScreen extends StackPane {
 	}
 
 	public static void loading(GridPane gp, TextArea t, Label pathLabel, Button backBut, Label note, Button loadBut) throws Exception {
-/////////////////////////////////////	equations	/////////////////////////////////////	
+//////////////////////////////////////	equations	/////////////////////////////////////	
 		String text1 = "";
 		for (Equation eq : Main.equations) {
 
@@ -231,7 +231,7 @@ public class HomeScreen extends StackPane {
 //		flow.getChildren().removeAll();
 
 		int counter = 0;
-		
+
 		String[] files = Main.files2.split("\n");
 
 		for (String file : files) {
@@ -240,7 +240,7 @@ public class HomeScreen extends StackPane {
 //		
 //		for (String file : Main.files) {
 //			System.out.println("another \t"+file);
-			
+
 			hyperFile = new Hyperlink(file);
 
 			TextFlow flow = new TextFlow(hyperFile);

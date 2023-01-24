@@ -15,13 +15,12 @@ import javafx.scene.Scene;
 public class Main extends Application {
 
 	static cStack<String> filesPaths = new cStack<>();
-	
+
 	static String path = "";
 	static Stage stage;
 	static String files2 = "";
 	static ArrayList<Equation> equations = new ArrayList<Equation>();
-	
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		Main.stage = stage;
@@ -45,7 +44,7 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	public static boolean fileChooser() throws Exception {// false= file is empty
+	public static boolean fileChooser() throws Exception {// false= file is invalid
 
 		FileChooser fc1 = new FileChooser();
 		fc1.getExtensionFilters().addAll(new ExtensionFilter("Text File", "*242"));
@@ -90,11 +89,12 @@ public class Main extends Application {
 		ArrayList<String> allLines = new ArrayList<String>();
 
 		while ((line1 = reader.readLine()) != null) {
+
 			allLines.add(line1.replaceAll("\\s", ""));
 
 		} // now "allLines" is an arraylist full of lines readed from the file
 
-		cStack<String> stack = new cStack<>();//
+		cStack<String> stack = new cStack<>(allLines.size());//
 
 		equations.clear();
 //		files.clear();
