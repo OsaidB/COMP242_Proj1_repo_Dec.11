@@ -17,14 +17,14 @@ public class BST<T extends Comparable<T>> {
 		else {
 			Node curr = root;
 			while (curr != null) {
-				if (curr.getData().compareTo(data) > 0)///////
+				if ((Integer) curr.getData().data > (Integer) data.data)///////
 					if (curr.hasLeft())
 						curr = curr.getLeft();
 					else {
 						curr.setLeft(add);
 						break;
 					}
-				else if (curr.getData().compareTo(data) < 0)
+				else if ((Integer) curr.getData().data < (Integer) data.data)
 					if (curr.hasRight())
 						curr = curr.getRight();
 					else {
@@ -102,13 +102,29 @@ public class BST<T extends Comparable<T>> {
 	}
 
 	public Node find(T data, Node node) {
+
+//		DNode
+
 		if (node != null) {
-			int comp = node.getData().compareTo(data);
-			if (comp == 0)
+
+			// compareTo(data);
+			// 0 if this Integer is equal to the argument Integer;
+			// a value less than 0 if this Integer is numerically less than the argument Integer;
+			// and a value greater than 0 if this Integer is numerically greater than the argument Integer (signed comparison).
+
+//			int comp = node.getData().compareTo(data);
+//			if (comp == 0)
+//				return node;
+//			else if (comp > 0 && node.hasLeft())
+//				return find(data, node.getLeft());
+//			else if (comp < 0 && node.hasRight())
+//				return find(data, node.getRight());
+
+			if (node.getData() == data) {
 				return node;
-			else if (comp > 0 && node.hasLeft())
+			} else if (((Integer) node.getData().data > (Integer) data) && node.hasLeft())////// 100% there is somthing wrong
 				return find(data, node.getLeft());
-			else if (comp < 0 && node.hasRight())
+			else if (((Integer) node.getData().data < (Integer) data) && node.hasRight())////// 100% there is somthing wrong
 				return find(data, node.getRight());
 		}
 		return null;
@@ -134,13 +150,37 @@ public class BST<T extends Comparable<T>> {
 		Node dad = root;
 		Node curr = root;
 		boolean isLeft = false;
-		int comp = curr.getData().compareTo(data);
+
+////////////////////////////////
+		// int comp = curr.getData().compareTo(data); //replacing this line to the following
+		int comp3 = -999;
+
+		if (curr.getData() == data) {
+			comp3 = 0;
+		} else if (((Integer) curr.getData().data > (Integer) data) && curr.hasLeft())////// 100% there is somthing wrong
+			comp3 = 999;
+		else if (((Integer) curr.getData().data < (Integer) data) && curr.hasRight())////// 100% there is somthing wrong
+			comp3 = -100;
+////////////////////////////////
+
+		// int comp = curr.getData().compareTo(data);
 		while (curr != null) {
-			comp = curr.getData().compareTo(data);
-			if (comp == 0)
+
+			//////////////////////////////////////////////////
+			// comp = curr.getData().compareTo(data); //replacing this line to the following
+
+			if (curr.getData() == data) {
+				comp3 = 0;
+			} else if (((Integer) curr.getData().data > (Integer) data) && curr.hasLeft())////// 100% there is somthing wrong
+				comp3 = 999;
+			else if (((Integer) curr.getData().data < (Integer) data) && curr.hasRight())////// 100% there is somthing wrong
+				comp3 = -100;
+			//////////////////////////////////////////////////
+
+			if (comp3 == 0)
 				break;
 			dad = curr;
-			if (comp > 0) {
+			if (comp3 > 0) {
 				isLeft = true;
 				curr = curr.getLeft();
 			} else {
@@ -149,7 +189,7 @@ public class BST<T extends Comparable<T>> {
 			}
 		}
 
-		if (comp != 0)
+		if (comp3 != 0)
 			return null;
 		else {
 			if (curr.isLeaf()) {
@@ -189,6 +229,9 @@ public class BST<T extends Comparable<T>> {
 		}
 	}
 
+	// murad's delete
+	// forget
+
 	private Node successor(Node node) {
 		Node parent = node;
 		Node successor = node.getRight();
@@ -196,7 +239,16 @@ public class BST<T extends Comparable<T>> {
 			parent = successor;
 			successor = successor.getLeft();
 		}
-		if (successor.getData().compareTo(node.getRight().getData()) != 0) {
+///////////////////////////////////////////////////////		
+		// if (successor.getData().compareTo(node.getRight().getData()) != 0) ///////// Replacing this line to the following:
+		int status = 0;// dont need to get in
+		if (((Integer) successor.getData().data > (Integer) node.getRight().getData().data) || ((Integer) successor.getData().data < (Integer) node.getRight().getData().data))////// 100% there is
+																																												////// somthing wrong
+			status = 1;// need to get in
+///////////////////////////////////////////////			
+
+//		if (successor.getData().compareTo(node.getRight().getData()) != 0) {
+		if (status == 1) {
 			parent.setLeft(successor.getRight());
 			successor.setRight(node.getRight());
 		}

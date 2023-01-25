@@ -2,8 +2,8 @@ package DLists;
 
 public class DNode {
 
-	Object data;//student
-	DNode next, prev;
+	public Object data;//student
+	public DNode next, prev;
 
 	public DNode(Object data) {
 		this.data = data;
