@@ -4,7 +4,7 @@ public class DLinkedList {
 
 	DNode head;
 
-	public void insertFirst(Object data) {
+	public void insertFirst(Student data) {
 
 		DNode newNode = new DNode(data);
 
@@ -17,7 +17,7 @@ public class DLinkedList {
 		head = newNode;
 	}
 
-	public void insertLast(Object data) {
+	public void insertLast(Student data) {
 
 		DNode newNode = new DNode(data);
 
@@ -38,7 +38,7 @@ public class DLinkedList {
 	}
 
 //=========================================================
-	public boolean searchList(Object data) {
+	public boolean searchList(Student data) {
 
 		DNode ptr = head;
 
@@ -60,12 +60,12 @@ public class DLinkedList {
 		return false;
 	}
 
-	public boolean recSearchList(Object data) {
+	public boolean recSearchList(Student data) {
 
 		return recSearchList(data, head);
 	}
 
-	private boolean recSearchList(Object data, DNode curr) {
+	private boolean recSearchList(Student data, DNode curr) {
 
 		if (curr != null) {
 			if (curr.data.equals(data)) {
@@ -75,6 +75,7 @@ public class DLinkedList {
 		}
 		return false;
 	}
+
 	//@formatter:off
 //=========================================================
 /*we dont need it
@@ -112,7 +113,7 @@ public class DLinkedList {
 
 	}
 */
-	public void deleteSorted(Object data) {// to be continued
+	public void deleteSorted(Student data) {// to be continued
 		DNode curr = head;
 
 		while (curr != null && curr.data.equals(data)) {

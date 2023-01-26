@@ -41,7 +41,7 @@ public class Node {
 		this.right = right;
 	}
 
-	public DNode getData() {//////////make SURE!! DNode OR Object!
+	public DNode getData() {////////// make SURE!! DNode OR Object!
 		return data;
 	}
 

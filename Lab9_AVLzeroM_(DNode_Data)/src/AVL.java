@@ -1,34 +1,72 @@
 import DLists.*;
 
-public class AVL<T extends Comparable<T>> extends BST<T> {
+public class AVL extends BST {
 
 	public AVL() {
 		root = null;
 	}
+///////////////////////////////////////////////////////////////////////////////////////	
 
-	public void insert(T key) {
-		root = insert(root, key);
+	/*
+	 * public void insert(DNode key) { root = insert(root, key); }
+	 */
+
+	public void insertGrade(DNode key) {
+		root = insertGrade(root, key);
 	}
 
-	private Node<T> insert(Node<T> root, T key) {
+	public void insertSeatNumber(DNode key) {
+		root = insertSeatNumber(root, key);
+	}
+
+	/*
+	 * private Node insert(Node root, DNode key) { if (root == null) { return new Node(key); } if ((Integer) key.data < (Integer) root.getData().data) { root.setLeft(insert(root.getLeft(), key)); }
+	 * else { root.setRight(insert(root.getRight(), key)); } return balance(root); }
+	 */
+
+	private Node insertGrade(Node root, DNode key) {// inserting a DNode(student) SORTED According to the Grade
 		if (root == null) {
-			return new Node<T>(key);
+			return new Node(key);
 		}
-		if (key.compareTo(root.getData()) < 0) {
-			root.setLeft(insert(root.getLeft(), key));
+		if (key.data.getAvg() < root.getData().data.getAvg()) {
+			root.setLeft(insertGrade(root.getLeft(), key));
 		} else {
-			root.setRight(insert(root.getRight(), key));
+			root.setRight(insertGrade(root.getRight(), key));
 		}
 		return balance(root);
 	}
 
-	public Node<T> delete(T key) {
-		Node<T> ret = super.delete(key);
+	private Node insertSeatNumber(Node root, DNode key) {// inserting a DNode(student) SORTED According to the seat number
+		if (root == null) {
+			return new Node(key);
+		}
+		if (key.data.getSeatNumber() < root.getData().data.getSeatNumber()) {
+			root.setLeft(insertSeatNumber(root.getLeft(), key));
+		} else {
+			root.setRight(insertSeatNumber(root.getRight(), key));
+		}
+		return balance(root);
+	}
+
+////////////////////////////////////////////
+	/*
+	 * public Node delete(DNode key) { Node ret = super.delete(key); root = balance(root); return ret; }
+	 */
+
+	public Node deleteGrade(DNode key) {
+		Node ret = super.deleteGrade(key);
 		root = balance(root);
 		return ret;
 	}
 
-	private Node<T> balance(Node<T> root) {
+	public Node deleteSeat(DNode key) {
+		Node ret = super.deleteSeatNum(key);
+		root = balance(root);
+		return ret;
+	}
+
+////////////////////////////////////////////////////////////////////////////	
+	private Node balance(Node root) {
 		if (root == null) {
 			return root;
 		}
@@ -49,40 +87,40 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 		return root;
 	}
 
-	private Node<T> rotateRightLeft(Node<T> root) {
-		Node<T> temp = root.getRight();
+	private Node rotateRightLeft(Node root) {
+		Node temp = root.getRight();
 		root.setRight(rotateRight(temp));
 		return rotateLeft(root);
 	}
 
-	private Node<T> rotateLeft(Node<T> root) {
-		Node<T> temp = root.getRight();
+	private Node rotateLeft(Node root) {
+		Node temp = root.getRight();
 		root.setRight(temp.getLeft());
 		temp.setLeft(root);
 		return temp;
 	}
 
-	private Node<T> rotateLeftRight(Node<T> root) {
-		Node<T> temp = root.getLeft();
+	private Node rotateLeftRight(Node root) {
+		Node temp = root.getLeft();
 		root.setLeft(rotateLeft(temp));
 		return rotateRight(root);
 	}
 
-	private Node<T> rotateRight(Node<T> root) {
-		Node<T> temp = root.getLeft();
+	private Node rotateRight(Node root) {
+		Node temp = root.getLeft();
 		root.setLeft(temp.getRight());
 		temp.setRight(root);
 		return temp;
 	}
 
-	private int getBalance(Node<T> root) {
+	private int getBalance(Node root) {
 		if (root == null) {
 			return 0;
 		}
 		return getHeight(root.getLeft()) - getHeight(root.getRight());
 	}
 
-	private int getHeight(Node<T> curr) {
+	private int getHeight(Node curr) {
 		if (curr == null)
 			return 0;
 		if (curr.isLeaf())
@@ -95,7 +133,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 		print(root);
 	}
 
-	private void print(Node<T> root) {
+	private void print(Node root) {
 		if (root == null) {
 			return;
 		}
@@ -113,7 +151,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 		}
 	}
 
-	private String printLevel(Node<T> root, int i, int j) {
+	private String printLevel(Node root, int i, int j) {
 
 		if (root != null) {
 			if (i == j)
