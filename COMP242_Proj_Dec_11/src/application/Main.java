@@ -40,8 +40,8 @@ public class Main extends Application {
 	}
 
 	public static void readGazaFile() throws Exception {
-//		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\97059\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\Gaza.txt"));
-		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\Gaza.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\97059\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\Gaza.txt"));
+//		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\Gaza.txt"));
 //		System.out.println(reader.readLine());
 		String line;
 
@@ -68,8 +68,8 @@ public class Main extends Application {
 	}
 
 	public static void readWBFile() throws Exception {
-//		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\97059\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\WestBank.txt"));
-		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\WestBank.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\97059\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\WestBank.txt"));
+//		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\OAB2K\\git\\COMP242_Proj1_repo_Dec.11\\COMP242_Proj_Dec_11\\src\\application\\WestBank.txt"));
 //		System.out.println(reader.readLine());
 		String line;
 

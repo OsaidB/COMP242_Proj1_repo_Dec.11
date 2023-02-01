@@ -11,9 +11,25 @@ public class SLL {
 
 	public void insertAtHead(DNode Student) {
 		SLLNode node = new SLLNode(Student);
+
 		if (head == null) {
 			head = node;
 		}
+
+	}
+
+	public void insertAtFirst(DNode Student) {
+		SLLNode newNode = new SLLNode(Student);
+
+		if (head == null) {
+			head = newNode;
+
+		} else {
+			newNode.setNext(head);
+			head = newNode;
+
+		}
+
 	}
 
 	public boolean haveOnlyOne() {
@@ -37,7 +53,7 @@ public class SLL {
 
 	public DNode findAndReturn(DNode Student) {
 		SLLNode curr = head;
-		
+
 		while (curr != null) {
 			if (curr.getStudent() == Student) {
 				return curr.getStudent();
@@ -46,7 +62,7 @@ public class SLL {
 		}
 		return null;
 	}
-	
+
 	public void delete(DNode Student) {
 		SLLNode ptr = head, prev = head;
 		if (ptr == null) {
@@ -89,13 +105,13 @@ public class SLL {
 	 */
 	@Override
 	public String toString() {
-		String s = "Head --> ";
+		String s = "";
 		SLLNode curr = head;
 		while (curr != null) {
 			s += curr.toString();
 			curr = curr.getNext();
 		}
-		return s + " " + "--> Null";
+		return s + " " + "\n";
 	}
 
 }

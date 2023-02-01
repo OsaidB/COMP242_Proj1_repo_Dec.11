@@ -1,24 +1,29 @@
+package DB;
 import DLists.*;
 
 public class TawjihiDS {
 
 	DLinkedList allStudentsDList = new DLinkedList();
 	GAVL gradesT = new GAVL();
-	S_AVL seatsT = new S_AVL();
+	public S_AVL seatsT = new S_AVL();
 
-	public void insertStudent(int seatNumber, String branch, double avg) {
+	public void insertStudent(Student stud) {
 
 		// 1-inserting Student to the "Double Linked List"(allStudentsDList)
-		Student s = new Student(seatNumber, branch, avg);
-		allStudentsDList.insertFirst(s);
+//		Student s = new Student(seatNumber, branch, avg);
+		allStudentsDList.insertFirst(stud);
 
 		///////////////////////////////////////////////////////////////////
 		// 2-inserting Student(dnode) to the "Grades AVL"(gradesT)
-		DNode dnode = new DNode(s);// IN ALL CASES we need to creat the dnode we want to add to the GAVL
+		DNode dnode = new DNode(stud);// IN ALL CASES we need to creat the dnode we want to add to the GAVL
 
-		GNode ifExist = gradesT.findGrade(avg);
+		GNode ifExist = gradesT.findGrade(stud.getAvg());
 		if (ifExist == null) {
 			gradesT.insertGrade(dnode);
+//			
+//			GNode node = gradesT.findGrade(stud.getAvg());
+//			node.insertInNextList(dnode);
+			
 		} else if (ifExist != null) {
 			// " !=null " means that node already exist,
 			// and we just need to add {the newStudent's Info(DNode)} to the Single linked list that exist
@@ -35,7 +40,7 @@ public class TawjihiDS {
 		///////////////////////////////////////////////////////////////////
 		// 3-inserting Student to the "Seat Numbers AVL"(seatsT)
 		// insertSeatNumber(DNode key)
-		S_Node seat = seatsT.findSteatNum(seatNumber);
+		S_Node seat = seatsT.findSteatNum(stud.getSeatNumber());
 		if (seat != null) {
 			// " !=null " means that node already exist. //Duplicate seatnum
 			System.out.println("you cant add two students with same seat number,it seems like student you are tring to add is already exist in the seats AVL!");
@@ -45,7 +50,7 @@ public class TawjihiDS {
 
 	}
 
-	public void deleteStudent(int seatNumber) {
+	public boolean deleteStudent(int seatNumber) {
 		DNode dNodeToDelete = allStudentsDList.searchSeat(seatNumber);
 
 		if (dNodeToDelete != null) {
@@ -56,12 +61,17 @@ public class TawjihiDS {
 
 			if (gNodeToDelete == null) {
 				System.out.println("You are trying to delete a student that is already not existing in the grades AVL!");
+				return false;
 			} else if (gNodeToDelete != null) {// there is at least one student that have the grade that student we want to delete having.
 
 				if (!(gNodeToDelete.getNextList().haveOnlyOne())) {// there are more than one student having that specific grade ---> so we delete ONLY THE DNode FROM THE SLL.
 					gNodeToDelete.getNextList().delete(dNodeToDelete);
+					System.out.println("deletion from gradesT.getNextList() was successfully completed.");
+
 				} else {// the student we want to delete is THE ONLY ONE that have that grade ---> WE DELETE THE WHOLE GNODE.
 					gradesT.deleteGrade(dNodeToDelete);
+					System.out.println("deletion from gradesT was successfully completed.");
+
 				}
 
 			}
@@ -70,16 +80,27 @@ public class TawjihiDS {
 			S_Node seat = seatsT.findSteatNum(seatNumber);
 			if (seat == null) {
 				System.out.println("there is no student with this seat number in seatsT");
+				return false;
 			} else {// seat ready to delete
 				seatsT.deleteSeat(dNodeToDelete);
+				System.out.println("deletion from seatsT was successfully completed.");
 			}
 
 			// 1-deleting Student from the "Double Linked List"(allStudentsDList)
-			allStudentsDList.remove(seatNumber);
+			boolean deleteStatus=allStudentsDList.remove(seatNumber);
+			if(deleteStatus==true) {
+				System.out.println("deletion from allStudentsDList was successfully completed.");
+			}else {
+				System.out.println("Not deleted From allStudentsDList");
+				return false;
+			}
+			
 
 		} else {
 			System.out.println("seatNum not found in DList");
+			return false;
 		}
+		return true;
 	}
 
 	public void updateStudent(int oldSeat, int seatNumber, String branch, double avg) {
@@ -185,15 +206,27 @@ public class TawjihiDS {
 	public DNode findStudent(int seatNumber) {
 		S_Node s = seatsT.findSteatNum(seatNumber);
 
+		if(s!=null)
 		return s.getData();
+		
+		return null;
 
 	}
 
 	public String allStudentsGot(double grade) {
 
+		String s="";
+		
 		GNode g = gradesT.findGrade(grade);
-
-		return g.getNextList() + "";
+		
+		if(g==null) {
+			s="null";
+		}else {
+			s=g.getNextList() + "";
+		}
+		
+		
+		return s;
 
 	}
 }

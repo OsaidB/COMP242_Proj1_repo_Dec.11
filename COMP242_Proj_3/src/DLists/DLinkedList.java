@@ -78,81 +78,110 @@ public class DLinkedList {
 		return false;
 	}
 
-	//@formatter:off
-//=========================================================
-/*we dont need it
-	public void insertSorrted(Object data) {
-
-		DNode newNode = new DNode(data);
-
-		DNode curr = head;
-
-		while (curr != null && (Integer) curr.data < (Integer) data) {////////////////
-
-			if (curr.next == null) {
-				break;
-			}
-
-			curr = curr.next;
-
-		}
-//		System.out.println(curr);
-		if (curr == null) {// case 0:insert at empty list
-			head = newNode;
-		} else if (curr.prev == null) {// case 1: insert at head
-			newNode.next = head;
-			head.prev = newNode;
-			head = newNode;
-		} else if ((Integer) curr.data < (Integer) data && curr.next == null) {// case 3: insert at ...IDK last maybe
-			newNode.prev = curr;
-			curr.next = newNode;
-		} else {// case 2: insert between(before curr)
-			newNode.next = curr;
-			newNode.prev = curr.prev;
-			curr.prev.next = newNode;
-			curr.prev = newNode;
-		}
-
+	public DNode getHead() {
+		return head;
 	}
-*/
 
-	
-	public void remove(int seatNum) {
-		DNode curr = head;
-
-		if (head == null) {
-			System.out.println("List is Empty");
-			return;
-		}
-
-		while (curr != null && !(curr.data.getSeatNumber()==seatNum)) {
-
-			curr = curr.next;
-		}
-//		for (; curr != null && !(curr.data.getSeatNumber()==seatNum); curr = curr.next);
-
-		if (curr == null) {
-			System.out.println("Not Exist !");
-		} else if (curr.next != null && curr.prev != null) {
-			curr.prev.next=curr.next;
-			curr.next.prev=curr.prev;
-		} else if (curr.next == null) {
-			curr.prev.next=curr.next;
-		} else {
-			head = curr.next;
-		}
+	public void setHead(DNode head) {
+		this.head = head;
 	}
+
+//	public void remove(int seatNum) {
+//		DNode curr = head;
+//
+//		if (head == null) {
+//			System.out.println("List is Empty");
+//			return;
+//		}
+//
+//		while (curr != null && !(curr.data.getSeatNumber() == seatNum)) {
+//
+//			curr = curr.next;
+//		}
+////		for (; curr != null && !(curr.data.getSeatNumber()==seatNum); curr = curr.next);
+//
+//		if (curr == null) {
+//			System.out.println("Not Exist !");
+//		} else if (curr.next != null && curr.prev != null) {
+//			curr.prev.next = curr.next;
+//			curr.next.prev = curr.prev;
+//		} else if (curr.next == null) {
+//			curr.prev.next = curr.next;
+//		} else {
+//			head = curr.next;
+//		}
+//	}
 
 	@Override
 	public String toString() {
 		DNode curr = head;
-		String s = "Head -->";
+		String s = "";
 
 		while (curr != null) {
-			s += curr + "-->";
+			s += curr + "\n";
 			curr = curr.next;
 		}
-		return s + "Null";
+		return s + "\n";
+	}
+
+	public boolean remove(int seatNum) {// the delete is ccourding to seat number!!
+		DNode curr = head;
+		if (head == null) {
+			System.out.println("you are trying to delete from an empty list!");
+			return false;
+		}
+		int currSeatNum = (curr.data).getSeatNumber();
+
+		// while (curr != null && curr.data.equals(data)) {
+//		while (curr != null && (currSeatNum < seatNum)) {
+		while (curr != null && (currSeatNum != seatNum)) {
+			curr = curr.next;// the next is smaller
+
+			if (curr != null) {
+				currSeatNum = (curr.data).getSeatNumber();
+			}
+		}
+
+		System.out.println(curr);
+		/*
+		 * curr: Three cases
+		 * 
+		 * 1-null
+		 * 
+		 * 2-same as the node we want(== seatNum)
+		 * 
+		 * 3-smaller than the node we want(currSeatNum<seatNum)
+		 * 
+		 *
+		 */
+
+		if (curr == null) {
+			System.out.println("element not found!");
+			return false;
+		}
+
+		if (curr.prev == null && curr.next == null) // case 0 : one node
+			head = null;
+		else if (curr.prev == null) { // case 1 : delete 1st node
+			head = curr.next;
+			// head.prev = null;
+			head.prev = null;
+		} else if (curr.next == null) // case 2 : delete last
+			// curr.prev.next = null;
+			curr.prev.next = null;
+		else { // case 3 : delete between
+				// curr.prev.next = curr.next;
+			curr.prev.next = curr.next;
+
+			// curr.next.prev = curr.prev;
+			curr.next.prev = curr.prev;
+		}
+
+//		}else {//currSeatNum == seatNum
+
+//		}
+
+		return true;
 	}
 
 }

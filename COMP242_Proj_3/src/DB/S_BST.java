@@ -1,12 +1,14 @@
-import DLists.*;
+package DB;
 
-public class GBST {
-	protected GNode root;
+import DLists.DNode;
 
-	public GBST() {
+public class S_BST {
+	protected S_Node root;
+
+	public S_BST() {
 	}
 
-	public GNode getRoot() {
+	public S_Node getRoot() {
 		return root;
 	}
 
@@ -17,34 +19,35 @@ public class GBST {
 	 * 
 	 * } }
 	 */
-	public void insertGrade(DNode student) {// inserting a DNode(student) SORTED According to the Grade
 
-		GNode toAdd = new GNode(student);
+	public void insertSeatNumber(DNode student) {// inserting a DNode(student) SORTED According to the seat number
+
+		S_Node toAdd = new S_Node(student);
 
 		if (root == null)
 			root = toAdd;
 		else {
-			double grade = student.data.getAvg();
-			GNode curr = root;
-			double currGrade = root.getAVLHeaderGrade();
+			int seatNum = student.data.getSeatNumber();
+			S_Node curr = root;
+			int currSeat = root.getData().data.getSeatNumber();
 
 			while (curr != null) {
 
-				if (currGrade > grade) { //////
+				if (currSeat > seatNum) { //////
 
 					if (curr.hasLeft()) {
 						curr = curr.getLeft();
-						currGrade = root.getAVLHeaderGrade();
+						currSeat = curr.getData().data.getSeatNumber();
 					} else {
 						curr.setLeft(toAdd);
 						break;
 					}
 
-				} else if (currGrade < grade) {
+				} else if (currSeat < seatNum) {
 
 					if (curr.hasRight()) {
 						curr = curr.getRight();
-						currGrade = root.getAVLHeaderGrade();
+						currSeat = curr.getData().data.getSeatNumber();
 					} else {
 						curr.setRight(toAdd);
 						break;
@@ -56,16 +59,16 @@ public class GBST {
 		}
 	}
 
-	public GNode max() {
-		GNode curr = root;
+	public S_Node max() {
+		S_Node curr = root;
 		while (curr.hasRight())
 			curr = curr.getRight();
 
 		return curr;
 	}
 
-	public GNode min() {
-		GNode curr = root;
+	public S_Node min() {
+		S_Node curr = root;
 		while (curr.hasLeft())
 			curr = curr.getLeft();
 
@@ -76,16 +79,16 @@ public class GBST {
 		return inOrdar(root);
 	}
 
-	private String inOrdar(GNode root) {
+	private String inOrdar(S_Node root) {
 		if (root != null) {
 			if (root.getLeft() != null && root.getRight() != null)
-				return inOrdar(root.getLeft()) + "\n" + root.getAVLHeaderGrade() + "\n" + inOrdar(root.getRight());
+				return inOrdar(root.getLeft()) + "\n" + root.getData() + "\n" + inOrdar(root.getRight());
 			else if (root.getRight() != null)
-				return root.getAVLHeaderGrade() + "\n" + inOrdar(root.getRight());
+				return root.getData() + "\n" + inOrdar(root.getRight());
 			else if (root.getRight() != null)
-				return inOrdar(root.getLeft()) + "\n" + root.getAVLHeaderGrade();
+				return inOrdar(root.getLeft()) + "\n" + root.getData();
 			else
-				return root.getAVLHeaderGrade() + "";
+				return root.getData().toString();
 		} else
 			return "";
 	}
@@ -94,7 +97,7 @@ public class GBST {
 		return toStringLevels(root);
 	}
 
-	private String toStringLevels(GNode curr) {
+	private String toStringLevels(S_Node curr) {
 		int x = height();
 		String soso = "";
 		for (int i = 0; i < x; i++) {
@@ -103,11 +106,11 @@ public class GBST {
 		return soso;
 	}
 
-	private String printLevel(GNode root, int i, int j) {
+	private String printLevel(S_Node root, int i, int j) {
 
 		if (root != null) {
 			if (i == j)
-				return root.getAVLHeaderGrade() + " ";
+				return root.getData() + " ";
 			if (j > i)
 				return "NULL";
 
@@ -117,12 +120,12 @@ public class GBST {
 
 	}
 /////////////////////////////////////////////////////
-
 	/*
 	 * public Node find(DNode student) { return find(student, root); }
 	 */
-	public GNode findGrade(double grade) {
-		return findGrade(grade, root);
+
+	public S_Node findSteatNum(int seatNum) {
+		return findSteatNum(seatNum, root);
 	}
 
 	/*
@@ -141,7 +144,8 @@ public class GBST {
 	 * if (node.getData() == student) { return node; } else if (((Integer) node.getData().data > (Integer) student.data) && node.hasLeft())////// 100% there is somthing wrong return find(data,
 	 * node.getLeft()); else if (((Integer) node.getData().data < (Integer) student.data) && node.hasRight())////// 100% there is somthing wrong return find(student, node.getRight()); } return null; }
 	 */
-	public GNode findGrade(double grade, GNode node) {// "student" is the Student i want to find...WRONG //BUT WHATS RIGHT IS that "node" is the root(I think so)
+
+	public S_Node findSteatNum(int seatNum, S_Node node) {// "student" is the Student i want to find...WRONG //BUT WHATS RIGHT IS that "node" is the root(I think so)
 
 //		DNode
 
@@ -160,61 +164,22 @@ public class GBST {
 //			else if (comp < 0 && node.hasRight())
 //				return find(data, node.getRight());
 
-			if (node.getAVLHeaderGrade() == grade) {
+			if (node.getData().data.getSeatNumber() == seatNum) {
 				return node;
-			} else if ((node.getAVLHeaderGrade() > grade) && node.hasLeft())////// 100% there is somthing wrong
-				return findGrade(grade, node.getLeft());
-			else if ((node.getAVLHeaderGrade() < grade) && node.hasRight())////// 100% there is somthing wrong
-				return findGrade(grade, node.getRight());
+			} else if ((node.getData().data.getSeatNumber() > seatNum) && node.hasLeft())////// 100% there is somthing wrong
+				return findSteatNum(seatNum, node.getLeft());
+			else if ((node.getData().data.getSeatNumber() < seatNum) && node.hasRight())////// 100% there is somthing wrong
+				return findSteatNum(seatNum, node.getRight());
 		}
 		return null;
 	}
 
-//	public GNode findSteatNum(int seatNum) {
-//		return findSteatNum(seatNum, root);
-//	}
-//	
-//	public GNode findSteatNum(int seatNum, GNode node) {// "student" is the Student i want to find...WRONG //BUT WHATS RIGHT IS that "node" is the root(I think so)
-//
-////		DNode
-//
-//		if (node != null) {
-//
-//			// compareTo(data);
-//			// 0 if this Integer is equal to the argument Integer;
-//			// a value less than 0 if this Integer is numerically less than the argument Integer;
-//			// and a value greater than 0 if this Integer is numerically greater than the argument Integer (signed comparison).
-//
-////			int comp = node.getData().compareTo(data);
-////			if (comp == 0)
-////				return node;
-////			else if (comp > 0 && node.hasLeft())
-////				return find(data, node.getLeft());
-////			else if (comp < 0 && node.hasRight())
-////				return find(data, node.getRight());
-//			
-////			find(DNode Student)
-////			if (node.getData().data.getSeatNumber() == seatNum) {
-//			
-//			node.nextList.find(node.getNextList());
-//			if (node.nextList.getData().data.getSeatNumber() == seatNum) {
-//				return node;
-//			} else if ((node.getData().data.getSeatNumber() > seatNum) && node.hasLeft())////// 100% there is somthing wrong
-//				return findSteatNum(seatNum, node.getLeft());
-//			else if ((node.getData().data.getSeatNumber() < seatNum) && node.hasRight())////// 100% there is somthing wrong
-//				return findSteatNum(seatNum, node.getRight());
-//		}
-//		return null;
-//	}
-
-
-/////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////
 	public int height() {
 		return hieght(root);
 	}
 
-	private int hieght(GNode curr) {
+	private int hieght(S_Node curr) {
 		if (curr == null)
 			return 0;
 		if (curr.isLeaf())
@@ -252,26 +217,71 @@ public class GBST {
 	 * if (curr == root) root = curr.getRight(); else if (isLeft) dad.setLeft(curr.getRight()); else dad.setRight(curr.getRight()); } else { Node successor = successor(curr); if (curr == root) root =
 	 * successor; else if (isLeft) dad.setLeft(successor); else dad.setRight(successor); successor.setLeft(curr.getLeft()); } return curr; } }
 	 */
-	public GNode deleteGrade(DNode student) {// deleting a node from (the avl of grads) that is based on BST
-		
-		double studGrade=student.data.getAvg();
-		
+
+	public S_Node deleteBST(DNode student) {
+		return root = deleteBST(root, student);
+	}
+
+	public S_Node deleteBST(S_Node T, DNode student) {
+
+		int studSeat = student.data.getSeatNumber();
+
+		S_Node tmp_cell, child = null;
+
+		if (T == null) {
+			System.out.printf("Element not found\n");
+		} else if (studSeat < T.getData().data.getSeatNumber()) {
+			T.setLeft(deleteBST(T.getLeft(), student));
+
+		} else if (studSeat > T.getData().data.getSeatNumber()) {
+			T.setRight(deleteBST(T.getRight(), student));
+
+		} else if ((T.getLeft()) != null && T.getRight() != null) {// foundelement andhas (right ,left)elements
+			tmp_cell = findMin(T.getRight());
+			T.setData(tmp_cell.getData());
+			T.setRight(deleteBST(T.getRight(), T.getData()));
+
+		} else {
+			tmp_cell = T;
+
+			if (T.getLeft() == null)
+				child = T.getRight();
+			if (T.getRight() == null)
+				child = T.getLeft();
+			return child;
+		}
+		return T;
+	}
+
+	S_Node findMin(S_Node T) {
+		if (T == null) // empty tree
+			return null;
+		else if (T.getLeft() == null) // node itself
+			return (T);
+		else
+			return (findMin(T.getLeft())); // find minrecursive
+	}
+
+	public S_Node deleteSeatNum(DNode student) {// deleting a node from (the avl of SeatNums) that is based on BST
+
+		int studSeat = student.data.getSeatNumber();
+
 		if (root == null)
 			return null;
 
-		GNode dad = root;
-		GNode curr = root;
+		S_Node dad = root;
+		S_Node curr = root;
 		boolean isLeft = false;
 
 ////////////////////////////////
 		// int comp = curr.getData().compareTo(data); //replacing this line to the following
 		int comp3 = -999;
 
-		if (curr.getAVLHeaderGrade() == studGrade) {
+		if (curr.getData() == student) {
 			comp3 = 0;
-		} else if ((curr.getAVLHeaderGrade() > studGrade) && curr.hasLeft())////// 100% there is somthing wrong
+		} else if ((curr.getData().data.getSeatNumber() > studSeat) && curr.hasLeft())////// 100% there is somthing wrong
 			comp3 = 999;
-		else if ((curr.getAVLHeaderGrade() < studGrade) && curr.hasRight())////// 100% there is somthing wrong
+		else if ((curr.getData().data.getSeatNumber() < studSeat) && curr.hasRight())////// 100% there is somthing wrong
 			comp3 = -100;
 ////////////////////////////////
 
@@ -281,11 +291,11 @@ public class GBST {
 			//////////////////////////////////////////////////
 			// comp = curr.getData().compareTo(data); //replacing this line to the following
 
-			if (curr.getAVLHeaderGrade() == studGrade) {
+			if (curr.getData() == student) {
 				comp3 = 0;
-			} else if ((curr.getAVLHeaderGrade() > studGrade) && curr.hasLeft())////// 100% there is somthing wrong
+			} else if ((curr.getData().data.getSeatNumber() > studSeat) && curr.hasLeft())////// 100% there is somthing wrong
 				comp3 = 999;
-			else if ((curr.getAVLHeaderGrade() < studGrade) && curr.hasRight())////// 100% there is somthing wrong
+			else if ((curr.getData().data.getSeatNumber() < studSeat) && curr.hasRight())////// 100% there is somthing wrong
 				comp3 = -100;
 			//////////////////////////////////////////////////
 
@@ -328,7 +338,7 @@ public class GBST {
 				else
 					dad.setRight(curr.getRight());
 			} else {
-				GNode successor = gradeSuccessor(curr);//////////////
+				S_Node successor = seatSuccessor(curr);/////////////////
 				if (curr == root)
 					root = successor;
 				else if (isLeft)
@@ -351,20 +361,23 @@ public class GBST {
 	 * 
 	 * // if (successor.getData().compareTo(node.getRight().getData()) != 0) { if (status == 1) { parent.setLeft(successor.getRight()); successor.setRight(node.getRight()); } return successor; }
 	 */
-	private GNode gradeSuccessor(GNode node) {
-		GNode parent = node;
-		GNode successor = node.getRight();
+
+	private S_Node seatSuccessor(S_Node node) {
+		S_Node parent = node;
+		S_Node successor = node.getRight();
 		while (successor.hasLeft()) {
 			parent = successor;
 			successor = successor.getLeft();
 		}
-///////////////////////////////////////////////////////		
+///////////////////////////////
 		// if (successor.getData().compareTo(node.getRight().getData()) != 0) ///////// Replacing this line to the following:
 		int status = 0;// dont need to get in
-		if ((successor.getAVLHeaderGrade() > node.getRight().getAVLHeaderGrade()) || (successor.getAVLHeaderGrade() < node.getRight().getAVLHeaderGrade()))////// 100% there is
-																																							////// somthing wrong
+		if ((successor.getData().data.getSeatNumber() > node.getRight().getData().data.getSeatNumber()) || (successor.getData().data.getSeatNumber() < node.getRight().getData().data.getSeatNumber()))////// 100%
+																																																		////// there
+																																																		////// is
+			////// somthing wrong
 			status = 1;// need to get in
-///////////////////////////////////////////////			
+//////////////////////////////		
 
 //		if (successor.getData().compareTo(node.getRight().getData()) != 0) {
 		if (status == 1) {

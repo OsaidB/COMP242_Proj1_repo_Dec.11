@@ -171,6 +171,7 @@ public class S_BST {
 		}
 		return null;
 	}
+
 /////////////////////////////////////////////////////////
 	public int height() {
 		return hieght(root);
@@ -216,6 +217,9 @@ public class S_BST {
 	 */
 
 	public S_Node deleteSeatNum(DNode student) {// deleting a node from (the avl of SeatNums) that is based on BST
+
+		int studSeat = student.data.getSeatNumber();
+
 		if (root == null)
 			return null;
 
@@ -229,9 +233,9 @@ public class S_BST {
 
 		if (curr.getData() == student) {
 			comp3 = 0;
-		} else if ((curr.getData().data.getSeatNumber() > student.data.getSeatNumber()) && curr.hasLeft())////// 100% there is somthing wrong
+		} else if ((curr.getData().data.getSeatNumber() > studSeat) && curr.hasLeft())////// 100% there is somthing wrong
 			comp3 = 999;
-		else if ((curr.getData().data.getSeatNumber() < student.data.getSeatNumber()) && curr.hasRight())////// 100% there is somthing wrong
+		else if ((curr.getData().data.getSeatNumber() < studSeat) && curr.hasRight())////// 100% there is somthing wrong
 			comp3 = -100;
 ////////////////////////////////
 
@@ -243,9 +247,9 @@ public class S_BST {
 
 			if (curr.getData() == student) {
 				comp3 = 0;
-			} else if ((curr.getData().data.getSeatNumber() > student.data.getSeatNumber()) && curr.hasLeft())////// 100% there is somthing wrong
+			} else if ((curr.getData().data.getSeatNumber() > studSeat) && curr.hasLeft())////// 100% there is somthing wrong
 				comp3 = 999;
-			else if ((curr.getData().data.getSeatNumber() < student.data.getSeatNumber()) && curr.hasRight())////// 100% there is somthing wrong
+			else if ((curr.getData().data.getSeatNumber() < studSeat) && curr.hasRight())////// 100% there is somthing wrong
 				comp3 = -100;
 			//////////////////////////////////////////////////
 
