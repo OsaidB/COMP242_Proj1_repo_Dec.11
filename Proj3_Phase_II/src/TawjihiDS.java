@@ -50,18 +50,26 @@ public class TawjihiDS {
 		DNode dNodeToDelete =allStudentsDList.searchSeat(seatNumber);
 		double avg=dNodeToDelete.data.getAvg();
 		// 1-deleting Student from the "Double Linked List"(allStudentsDList)
-
 		allStudentsDList.remove(seatNumber);
 
 		///////////////////////////////////////////////////////////////////
 		// 2-deleting Student(dnode) from the "Grades AVL"(gradesT)
-
 		GNode gNodeToDelete = gradesT.findGrade(avg);
+		
 		if (gNodeToDelete == null) {
-			System.out.println("You are trying to delete a student that is already not existing in the grades AVL!");
-		} else if (gNodeToDelete != null) {
-			// " !=null " means that node exist,So we can delete it!!
-
+		System.out.println("You are trying to delete a student that is already not existing in the grades AVL!");
+		} else if (gNodeToDelete != null) {//then gNodeToDelete is the node we want to delete
+			
+			gradesT.deleteGrade(dNodeToDelete);
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			//if its alone in the SLL --> we need to delete it twice
 			//first from the SLL (gradesT.nextList)
 			//and second from the GAVL(gradesT) (we need to delete the "GNode" that ( GNode.AVLHeaderGrade==avg )
