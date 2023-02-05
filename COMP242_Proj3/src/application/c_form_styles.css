@@ -1,0 +1,113 @@
+#body{
+    -fx-background-color: #F2F2F2;
+
+}
+
+.text-field{
+    -fx-background-radius: 10.0px;
+    -fx-padding: 10.0px;
+    -fx-font-size: 24.0px;
+}
+
+.has-top-border{
+    -fx-border-width : 2.0 0.0 0.0 0.0;
+    -fx-border-color : #AAAAAA;
+}
+
+.labelS{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10.0px;
+    -fx-padding: 10.0px;
+    -fx-font-size: 24.0px;
+}
+
+.text {
+    -fx-padding: 10.0px;
+    -fx-font-size: 22.0px;
+}
+
+.small-text{
+    -fx-font-size: 14.0px;
+    -fx-pref-width: 100.0px;
+}
+
+.label-text {
+    -fx-padding: 10.0px;
+    -fx-font-size: 24.0px;
+}
+
+.warning-label{
+    -fx-background-color: #DBC1C1;
+    -fx-background-radius: 10.0px;
+    -fx-padding: 10.0px;
+    -fx-font-size: 24.0px;
+    -fx-text-fill: #011627;
+}
+
+
+.menu{
+    -fx-background-color: white;
+    -fx-text-fill: #011627;
+     -fx-font-size: 10.0px;
+     
+    -fx-pref-width: 150px;
+    -fx-min-width: 150px;
+    
+    -fx-pref-height: 30px;
+    -fx-max-height: 30px;
+    
+    -fx-cursor: hand;
+    -fx-background-radius: 10.0px;
+}
+
+.success-label{
+    -fx-background-color: #011627;
+    -fx-background-radius: 10.0px;
+    -fx-padding: 10.0px;
+    -fx-font-size: 24.0px;
+    -fx-text-fill: #F2F2F2;
+}
+
+.button{
+    -fx-background-color: #BDEFEA;
+    -fx-text-fill: #011627;
+    -fx-font-size: 27.0px;
+    -fx-pref-width: 300.0px;
+    -fx-pref-height: 60.0px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10.0px;
+}
+
+.back-button{
+    -fx-background-color: #011627;
+    -fx-text-fill: #F2F2F2;
+    -fx-font-size: 20.0px;
+    -fx-pref-width: 80.0px;
+    -fx-pref-height: 30.0px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10.0px;
+}
+
+.transparent_pane{
+    -fx-opacity: 0.0;
+    -fx-font-size: 27.0px;
+    -fx-pref-width: 0.0px;
+    -fx-pref-height: 94.0px;
+    -fx-background-radius: 10.0px;
+}
+
+
+.light-bg{
+    -fx-background-color: #F2F2F2;
+}
+.light-primary-bg{
+    -fx-background-color: #BDEFEA;
+}
+.primary-bg{
+    -fx-background-color: #2BB6A8;
+}
+.dark-bg{
+    -fx-background-color: #011627;
+    -fx-text-fill: #F2F2F2;
+}
+

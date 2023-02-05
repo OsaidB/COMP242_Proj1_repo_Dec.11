@@ -1,0 +1,73 @@
+#body{
+    -fx-background-color: #F2F2F2;
+
+}
+
+.btn{
+    -fx-background-color: #BDEFEA;
+    -fx-text-fill: #011627;
+    -fx-font-size: 27.0px;
+    -fx-pref-width: 400.0px;
+    -fx-pref-height: 94.0px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10.0px;
+}
+
+.has-top-border{
+    -fx-border-width : 2.0 0.0 0.0 0.0;
+    -fx-border-color : #AAAAAA;
+}
+
+.menu{
+    -fx-background-color: white;
+    -fx-text-fill: #011627;
+     -fx-font-size: 20.0px;
+    -fx-pref-width: 80.0px;
+    -fx-pref-height: 94.0px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10.0px;
+}
+
+.small_btn{
+    -fx-background-color: #011627;
+    -fx-text-fill: #F2F2F2;
+    -fx-font-size: 27.0px;
+    -fx-pref-width: 150.0px;
+    -fx-pref-height: 60.0px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10.0px;
+}
+
+.back-button{
+    -fx-background-color: #011627;
+    -fx-text-fill: #F2F2F2;
+    -fx-font-size: 20.0px;
+    -fx-pref-width: 80.0px;
+    -fx-pref-height: 30.0px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10.0px;
+}
+
+.transparent_pane{
+    -fx-opacity: 0.0;
+    -fx-font-size: 27.0px;
+    -fx-pref-width: 0.0px;
+    -fx-pref-height: 94.0px;
+    -fx-background-radius: 10.0px;
+}
+
+
+.light-bg{
+    -fx-background-color: #F2F2F2;
+}
+.light-primary-bg{
+    -fx-background-color: #BDEFEA;
+}
+.primary-bg{
+    -fx-background-color: #2BB6A8;
+}
+.dark-bg{
+    -fx-background-color: #011627;
+    -fx-text-fill: #F2F2F2;
+}
+
